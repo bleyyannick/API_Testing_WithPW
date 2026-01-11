@@ -11,10 +11,6 @@ test.beforeEach(async ({ page }) => {
   });
 
   await page.goto('https://conduit.bondaracademy.com/');
-  await page.locator('a.nav-link').getByText('Sign in').click();
-  await page.getByPlaceholder('Email').fill('yussuf@gmail.com');
-  await page.getByPlaceholder('Password').fill('yannick92');
-  await page.getByRole('button', { name: 'Sign in' }).click();
 
 });
 
@@ -60,7 +56,7 @@ test('should delete an article', async ({ page, request }) => {
   const createArticleResponse = await request.post('https://conduit-api.bondaracademy.com/api/articles', { 
     data: {
       "article": {
-        "title": " Just a lil another article need to be really deleted",
+        "title": " Article to be deleted",
         "description": "This other article will be deleted in this test right after creation",
         "body": "This is the body of the article to be deleted",
         "tagList": []
@@ -81,12 +77,12 @@ test('should delete an article', async ({ page, request }) => {
    await page.getByText("Home").click();
    await page.locator('a.nav-link').filter({ hasText: 'Global Feed' }).click();
 
-   await expect(page.locator('app-article-list h1').first()).not.toHaveText('Just a lil another article need to be really deleted');
+   await expect(page.locator('app-article-list h1').first()).not.toHaveText('Article to be deleted');
 
 
-  });
+});
   
-  test('should do something that AI dont know yet', async ({ page, request }) => {
+test('should do something that AI dont know yet', async ({ page, request }) => {
     // Test implementation goes here
     await page.locator('a.nav-link').getByText('New Article').click();
     await page.getByPlaceholder('Article Title').fill('AI makes me unemployed fuck it');
@@ -122,7 +118,5 @@ test('should delete an article', async ({ page, request }) => {
   });
   
   expect(deleteResponse.status()).toBe(204);
-
-
-  });
+});
 
