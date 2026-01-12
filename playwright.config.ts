@@ -30,6 +30,11 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+     extraHTTPHeaders: {
+      // Add authorization token to all requests.
+      // Assuming personal access token available in the environment.
+      'Authorization': `Token ${process.env.ACCESS_TOKEN}`,
+    },
   },
 
   /* Configure projects for major browsers */
